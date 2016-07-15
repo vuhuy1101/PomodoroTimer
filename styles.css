@@ -1,0 +1,100 @@
+body{
+	background-color: #383840;
+}
+
+#breakTime{
+	text-align:center;
+	color:white;
+	float:left;
+	position: relative;
+}
+
+.controlButton{
+	background-color:Transparent;
+	color:white;
+	border: none;
+	font-size:5em;
+}
+
+#workTime{
+		text-align:center;
+}
+
+#workTime span{
+	font-size: 5em;
+	margin: 0 20px 0 20px;
+}
+
+.controlButton:hover{
+	color:#f5ea38;
+}
+
+#breakTime span{
+	font-size: 5em;
+	margin: 0 20px 0 20px;
+}
+
+
+#section{
+	text-align: center;
+	margin-top:30px;
+	margin-bottom:10px;
+}
+
+#time{
+	position:relative;
+	height:200px;
+	width:200px;
+	margin: 0 auto;
+	font-size:4em;
+	margin: 0 auto;
+	border:5px solid #ffffa7;
+	border-radius: 100px;
+	line-height:200px;
+	color: #ffffa7;
+}
+
+.generalBttn{
+	width:150px;
+	height:50px;
+	border-radius:20px;
+	border: 1px solid black;
+	border-style:none;
+	margin-right:10px;
+	margin-left:10px;
+	font-size: 1.3em;
+}
+
+#bttn{
+	background-color:#bdcc7f;
+	color:#ffffa7;
+}
+
+#bttn:hover{
+	background-color:#9cae5a;
+}
+
+#stopBttn{
+	background-color:#f68280;
+	color:#ffffa7;
+}
+
+#stopBttn:hover{
+	background-color:#ce6d6d;
+}
+
+.updateBttn{
+	background-color:white
+}
+
+.updateBttn:hover{
+	background-color:#fff837;
+}
+
+#workTime{
+	position:relative;
+	float:right;
+	color:white;
+}
+
+

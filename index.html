@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pomodoro Timer</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div id="breakTime">
+			<h1>Break Time</h2>
+			<button class="controlButton" onclick="subtract(breakTime,'break')">-</button><span id="break">5</span><button class="controlButton" onclick="add(breakTime,'break')">+</button><br/>
+			<button class="generalBttn updateBttn" onclick="update(breakTime,'break')">Update</button>
+		</div>
+
+		<div id="workTime">
+			<h1>Work Time</h1>
+			 <button class="controlButton" onclick="subtract(workTime,'work')">-</button><span id="work">25</span><button class="controlButton" onclick="add(workTime,'work')">+</button>
+			<br/>
+			<button class="generalBttn updateBttn" onclick="update(startTime,'work')">Update</button>
+		</div>
+
+		<div id="section">
+			<p id="time">25:00</p><br/>
+		<button class="generalBttn" id="bttn" onclick="timer(remaining, display)">Start</button>
+		<button class="generalBttn" id="stopBttn" onclick="stop(startTime,display)">Stop</button>
+		</div>
+		 
+		<script type="text/javascript">
+			startTime = 60*25;
+			breakTime = 60*5;
+			timePass = 0;
+			remaining = startTime;
+			valid = 1;
+			text = "Start";
+			myVar = 0;
+			var display = document.querySelector("#time");
+			passDisplay = document.querySeletor("#pass");
+
+
+
+			function countDown(duration, display){
+				var timer = duration;
+				
+				myVar = setInterval(function(){
+				var minutes = parseInt(timer/60);
+				var seconds = parseInt(timer%60);
+				
+				seconds = seconds < 10 ? "0" + seconds : seconds;
+				display.textContent = minutes + ":" + seconds;
+				if(valid == 1 && --timer < 0){
+					remaining = breakTime;
+					valid = 0;
+					clearInterval(myVar);
+					timePass = 0;
+					countDown(remaining, display);
+				}
+				else if(valid == 0 && --timer < 0){
+					remaining = startTime;
+					valid = 1;
+					clearInterval(myVar);
+					timePass = 0;
+					countDown(remaining, display);
+				}
+				else{
+					timePass++; 
+					if(valid == 1)
+						remaining = startTime - timePass;
+					else remaining = breakTime - timePass;
+				}},1000);
+				
+			}
+
+			function pause(){
+				clearInterval(myVar);
+			}
+
+			function stop(duration, display){
+				clearInterval(myVar);
+				valid = 1;
+				document.getElementById("bttn").textContent = "Start";
+				var timer = duration;
+				var minutes = parseInt(timer/60);
+				var seconds = parseInt(timer%60);
+				
+				seconds = seconds < 10 ? "0" + seconds : seconds;
+				display.textContent = minutes + ":" + seconds;
+				remaining = duration;
+			}
+
+			function timer(duration, display){
+				var button = document.getElementById("bttn");
+				if(button.textContent == "Start"){
+					button.textContent = "Pause";
+					countDown(duration, display);
+				}
+				else{
+					pause();
+					button.textContent = "Start";
+				}
+			}
+
+			function add(time,name){
+				if(name == "break")
+					var elem = document.getElementById("break");
+				else
+					var elem = document.getElementById("work");
+				elem.textContent++;
+			}
+
+			function subtract(time,name){
+				if(name == "break")
+					var elem = document.getElementById("break");
+				else
+					var elem = document.getElementById("work");
+				elem.textContent--;
+			}
+
+			function update(time,name){
+				if(name == "break"){
+					var elem = document.getElementById("break");
+					var num = elem.textContent - (breakTime/60);
+					breakTime = breakTime + (num*60);
+					remaining = breakTime;
+				}
+				else{
+					var elem = document.getElementById("work");
+					var num = elem.textContent - (startTime/60);
+					startTime = startTime + (num*60);
+					remaining = startTime;
+					stop(remaining, display);
+				} 
+			}
+		</script>
+	</body>
+</html>
